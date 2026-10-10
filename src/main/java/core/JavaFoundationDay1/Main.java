@@ -1,7 +1,7 @@
-package core.JavaFoundation;
+package core.JavaFoundationDay1;
 
 import OOPS.Demo;
-import constructors.Cons;
+import Day2.Cons;
 
 public class Main extends Demo {
     public static void main(String[] args) {

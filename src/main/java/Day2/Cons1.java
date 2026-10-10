@@ -1,4 +1,4 @@
-package constructors;
+package Day2;
 
 public class Cons1 {
     String name;

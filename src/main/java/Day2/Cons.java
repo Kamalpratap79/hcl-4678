@@ -1,4 +1,4 @@
-package constructors;
+package Day2;
 
 public class Cons {
     //constructor is default type if we do not use public or protected and can not called by outside package

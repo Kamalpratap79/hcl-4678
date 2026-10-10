@@ -1,8 +1,6 @@
-package Collection;
+package Day4;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Stack;
 
 public class col2 {
     public static void main(String[] args) {

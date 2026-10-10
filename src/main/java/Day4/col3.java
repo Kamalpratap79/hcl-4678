@@ -1,4 +1,4 @@
-package Collection;
+package Day4;
 
 import java.util.Iterator;
 import java.util.Stack;

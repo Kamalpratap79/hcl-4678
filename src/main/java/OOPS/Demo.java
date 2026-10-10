@@ -1,7 +1,5 @@
 package OOPS;
 
-import core.JavaFoundation.Main;
-
 public class Demo {
     protected void fun() {
         System.out.println("Hello");
