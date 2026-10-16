@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class LibraryManager implements Admin {
+public abstract class LibraryManager implements Admin {
     HashMap<Integer, Books> booksList = new HashMap<>();
     List<DVD> dvdList = new ArrayList<>();
     List<Magazine> magazineList = new ArrayList<>();
@@ -19,8 +19,8 @@ public class LibraryManager implements Admin {
         Books book = new Books(){
             @Override
             public void setBookName(String bookName){
-                super.setBookName(bookName){
-                }
+                super.setBookName(bookName);
+
             }
 
             @Override
@@ -33,7 +33,7 @@ public class LibraryManager implements Admin {
                 super.setCountOfBooks(countOfBooks);
             }
         };
-        booksList.add(book);
+        booksList.put(id,book);
     }
 
     @Override
