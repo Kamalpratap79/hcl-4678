@@ -35,4 +35,14 @@ public class EmployeeServiceImp {
         temp.add(new Employee(2003,"ttia","FSD","Java","harsh@gmail.com"));
         return empRepoImp.addEmpBulk(temp);
     }
+
+    public String deleteById(){
+        long empid = 2000; //id as per your list of employee
+        return empRepoImp.deleteById(empid);
+    }
+
+    public String updateById(){
+        long empid = 2002;
+        return empRepoImp.updateById(empid);
+    }
 }
