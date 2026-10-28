@@ -7,6 +7,8 @@ import org.abes.hrmsdatabase.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin("http://localhost:5173/")
 @RequestMapping("v1/user/attendance")
@@ -20,5 +22,16 @@ public class AttendanceController {
         return attendanceService.markAttendance(attendance);
     }
 
+    @GetMapping("/getattendance")
+    public List<Attendance> getAllAttendance() {
+        return attendanceService.getAllAttendance();
+    }
+
+    @GetMapping("/employee/{empid}")
+    public List<Attendance> getAttendanceByEmployee(
+            @PathVariable Long empid) {
+
+        return attendanceService.getAttendanceByEmployeeId(empid);
+    }
 
 }

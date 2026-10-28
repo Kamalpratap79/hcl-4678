@@ -6,7 +6,10 @@ import org.abes.hrmsdatabase.repository.AttendanceRepository;
 import org.abes.hrmsdatabase.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class AttendanceService {
@@ -25,7 +28,8 @@ public class AttendanceService {
         long empId = attendance.getEmployee().getEmpid();
 
         if (employeeRepository.existsById(empId)) {
-            boolean alreadyMarked = attendanceRepository.existsByEmployee_EmpidAndAttendancedate(empId, LocalDate.now());
+            boolean alreadyMarked = attendanceRepository.
+                    existsByEmployee_EmpidAndAttendancedate(empId, LocalDate.now());
 
             if (!alreadyMarked) {
                 attendance.setAttendancedate(LocalDate.now());
@@ -39,4 +43,13 @@ public class AttendanceService {
         }
     }
 
+
+    public List<Attendance> getAllAttendance() {
+        return attendanceRepository.findAll();
+    }
+
+    public List<Attendance> getAttendanceByEmployeeId(Long empid) {
+        return attendanceRepository
+                .findByEmployee_EmpidOrderByAttendancedateDesc(empid);
+    }
 }
