@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("http://localhost:5173/")
+@RequestMapping("v1/user")
 public class EmployeeController {
 
     @Autowired
@@ -18,8 +19,19 @@ public class EmployeeController {
     }
 
     @PostMapping("/addemp")
-    public String addNewEmployee(){
-        return employeeService.createNewEmployee();
+    public String addNewEmployee(@RequestBody Employee emp){
+        return employeeService.createNewEmployee(emp);
+    }
+
+
+    @PostMapping("/login")
+    public String login(@RequestParam("empid") long empid,@RequestParam("password") String password){
+        if(employeeService.isLoggedIn(empid,password)){
+            return "Employee is logged in";
+        }else{
+            return "Employee Not found";
+        }
+
     }
 
     @GetMapping("findbyid/{empid}")

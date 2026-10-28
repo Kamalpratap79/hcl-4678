@@ -10,8 +10,11 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public String createNewEmployee(){
-        Employee emp1 = new Employee(200L,"rahul","Java","Developer");
+    public boolean isLoggedIn(long empid, String password) {
+        return employeeRepository.existsByPasswordAndEmpid(password,empid);
+    }
+
+    public String createNewEmployee(Employee emp1){
         employeeRepository.save(emp1);
         return "Employee is Added Succefully";
     }
@@ -19,6 +22,12 @@ public class EmployeeService {
     public Employee getEmployeeById(long empid){
         return employeeRepository.findById(empid).orElse(null);
     }
+
+//    public String verifcation(Employee employee){
+//        if(employeeRepository.existByEmail(employee.getEmail())){
+//
+//        }
+//    }
 
     public String DeleteEmployee(long empid){
         employeeRepository.deleteById(empid);
@@ -28,7 +37,7 @@ public class EmployeeService {
     public Employee UpdateByID(long empid){
         Employee emp = employeeRepository.findById(empid)
                 .orElseThrow(() ->new RuntimeException("Employee Not found"));
-        emp.setEmp_name("prakash");
+        emp.setName("prakash");
         return employeeRepository.save(emp);
     }
 
