@@ -50,11 +50,18 @@ function Login() {
         return;
       }
 
-      if (responseText.trim().toLowerCase() === "employee is logged in") {
-            navigate("/");
-            } else {
-                     alert("Invalid employee ID or password");
-        }
+      if (
+        responseText.trim().toLowerCase() ===
+        'employee is logged in'
+      ) {
+       navigate('/dashboard', {
+       state: {
+        empid: loginForm.empid
+      }
+   });
+    } else {
+       alert('Invalid employee ID or password');
+  }
     } catch (error) {
       console.error('Login error:', error);
       alert('Unable to connect to the server.');

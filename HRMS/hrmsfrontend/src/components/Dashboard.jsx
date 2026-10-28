@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Dashboard.css';
 
-const API_URL = 'http://localhost:8080/v1/user/attendance';
+const API_URL = 'http://localhost:8080/v1/user/attendance/employee';
 
 function formatDate(value) {
   if (!value) return '--';
@@ -43,7 +44,8 @@ function Dashboard() {
   const [statusFilter, setStatusFilter] = useState('all');
 
   // Use the employee ID of the logged-in user here.
-  const empid = 1;
+  const location = useLocation();
+  const empid = location.state?.empid;
 
   useEffect(() => {
     async function fetchAttendance() {
@@ -51,7 +53,11 @@ function Dashboard() {
         setLoading(true);
         setError('');
 
-        const response = await fetch(API_URL);
+        if (!empid) {
+                    throw new Error('Employee ID missing. Please log in again.');
+        }
+
+  const response = await fetch(`${API_URL}/${empid}`);
 
         if (!response.ok) {
           throw new Error(`Unable to load attendance (${response.status})`);
@@ -74,7 +80,7 @@ function Dashboard() {
     }
 
     fetchAttendance();
-  }, []);
+  }, [empid]);
 
   const employeeAttendance = useMemo(
     () =>
