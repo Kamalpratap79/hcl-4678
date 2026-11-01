@@ -33,17 +33,21 @@ public class AuthController {
                     Map.of("error","username is already in use")
             );
         }
+        
         userRepository.save(new User(req.username(),passwordEncoder.encode(req.password())));
+        
         return ResponseEntity.ok(Map.of("Message","User registered succesfully"));
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody AuthRequest req){
         var user = userRepository.findByUsername(req.username()).orElse(null);
+        
         if(user == null || passwordEncoder.matches(req.password(), user.getPassword())){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(Map.of("error","username or password is incorrect"));
         }
+        
         return ResponseEntity.ok(
                 new AuthResponse(jwtService.generateToken(user.getUsername()),
                         user.getUsername()));
