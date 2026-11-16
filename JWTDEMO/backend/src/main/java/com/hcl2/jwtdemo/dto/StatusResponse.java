@@ -1,4 +1,4 @@
 package com.hcl2.jwtdemo.dto;
 
-public class StatusResponse {
+public record StatusResponse(String type, String message) {
 }

@@ -1,16 +1,14 @@
 package com.hcl2.jwtdemo.controller;
 
-import com.hcl2.jwtdemo.dto.AuthRequest;
-import com.hcl2.jwtdemo.entity.Post;
-import com.hcl2.jwtdemo.repository.PostRepository;
+import com.hcl2.jwtdemo.dto.PostRequest;
+import com.hcl2.jwtdemo.dto.PostResponse;
+import com.hcl2.jwtdemo.service.PostService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,15 +16,16 @@ import java.util.List;
 @RequestMapping("/api/v1/posts")
 @AllArgsConstructor
 public class PostController {
-    private final PostRepository postRepository;
+    private final PostService postService;
 
     @GetMapping
-    public List<Post> all(){
-        return postRepository.findAllByOrderByCreatedAtDesc();
+    public List<PostResponse> all() {
+        return postService.findAll();
     }
 
-    public Post create(@Valid @RequestBody Post req,
-                       Authentication auth){
-        return postRepository.save(new Post(req.getTitle(), req.getContent(), auth.getName()));
+    @PostMapping
+    public ResponseEntity<PostResponse> create(@Valid @RequestBody PostRequest req, Authentication auth) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(postService.addPost(req, auth.getName()));
     }
 }
