@@ -3,6 +3,7 @@ package com.hcl2.jwtdemo.controller;
 import com.hcl2.jwtdemo.dto.PostRequest;
 import com.hcl2.jwtdemo.dto.PostResponse;
 import com.hcl2.jwtdemo.service.PostService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/posts")
+@Tag(name="Post APIs")
 @AllArgsConstructor
 public class PostController {
     private final PostService postService;

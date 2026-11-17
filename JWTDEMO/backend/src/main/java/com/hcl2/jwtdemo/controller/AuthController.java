@@ -4,6 +4,7 @@ import com.hcl2.jwtdemo.dto.AuthRequest;
 import com.hcl2.jwtdemo.dto.AuthResponse;
 import com.hcl2.jwtdemo.dto.StatusResponse;
 import com.hcl2.jwtdemo.service.AuthService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
+@Tag(name="Auth APIs")
 @RequestMapping("/api/v1/auth")
 public class AuthController {
     private final AuthService authService;
