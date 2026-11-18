@@ -1,0 +1,13 @@
+# Deployment of springboot App
+
+# Folder Structure
+- /backend/Dockerfile
+- /backend/.dockerignore
+- /frontend/Dockerfile
+- /frontend/.dockerignore
+- /frontend/nginx.conf
+- root/docker-compose.yml
+- root/ .env
+- root/ .gitignore
+
+
