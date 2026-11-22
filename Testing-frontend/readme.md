@@ -53,3 +53,5 @@ update package.json
     "preview": "vite preview"
   },
 ```
+
+## Create first test using jest in react
